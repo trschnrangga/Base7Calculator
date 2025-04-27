@@ -132,7 +132,7 @@ export default function Calculator() {
   }, []);
 
   return (
-    <div ref={containerRef} className='flex w-screen h-screen justify-center'>
+    <div ref={containerRef} className='flex w-screen h-screen justify-center select-none'>
         {images.map((src: string, index: number) => (
         <motion.img
             key={index}
