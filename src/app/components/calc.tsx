@@ -172,7 +172,7 @@ export default function Calculator() {
             }}
         />
         ))}
-        <div className='flexbox justify-items-center align-middle p-20'>
+        <div className='flexbox justify-items-center align-middle p-20 select-none'>
 
             <AnimatedBackground animationName='geometricShapes' blendMode='normal'/>
             <AnimatedBackground animationName='geometricShapes' blendMode='lighten' style={{opacity: .05}}/>
