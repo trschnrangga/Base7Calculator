@@ -1,17 +1,16 @@
 'use client'; // if you're using Next.js 13+
 import {AnimatedBackground} from 'animated-backgrounds';
 import {AnimatedText} from 'animated-backgrounds'
-import { parse } from 'path';
 import { useState, useEffect } from 'react';
-import { motion, px, spring } from "framer-motion";
+import { motion} from "framer-motion";
 import '../calc.css';
 import { useRef } from 'react';
+import { image } from 'framer-motion/client';
 
 export default function Calculator() {
   const [currentValue, setCurrentValue] = useState<string>('0');
   const [inputValue, setInputValue] = useState<string>('');
   const [operation, setOperation] = useState<string | null>(null);
-  const [result, setResult] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [imagePositions, setImagePositions] = useState<{ top: number; right: number }[]>([]);
   const [imagesVisible, setImagesVisible] = useState(false);
@@ -53,7 +52,6 @@ export default function Calculator() {
     setCurrentValue(newValue.toString(7));
     setInputValue('');
     setOperation(op);
-    setResult(null);
   };
 
   const handleEquals = () => {
@@ -78,7 +76,7 @@ export default function Calculator() {
       break;
     case 'divide':
       if (inputBase10 === 0) {
-        setResult('Cannot divide by zero');
+        setCurrentValue("Cannot divide by zero")
         return;
       }
       newValue = currentBase10 / inputBase10;
@@ -89,7 +87,6 @@ export default function Calculator() {
 
     const newValueBase7 = newValue.toString(7);
     setCurrentValue(newValueBase7); // update the current value
-    setResult(""); // set the result to the same value
     setOperation(null); // clear the operation
     setInputValue(''); // clear the input
   }
@@ -98,7 +95,6 @@ export default function Calculator() {
     setCurrentValue('0');
     setInputValue('');
     setOperation(null);
-    setResult(null);
   }
 
   const getOperationSymbol = (op: string) => {
@@ -133,11 +129,12 @@ export default function Calculator() {
       
       setImagesVisible(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div ref={containerRef} className='flex w-screen h-screen justify-center'>
-        {images.map((src: any, index: any) => (
+        {images.map((src: string, index: number) => (
         <motion.img
             key={index}
             initial={{ opacity: 0}}
