@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { motion} from "framer-motion";
 import '../calc.css';
 import { useRef } from 'react';
-import { image } from 'framer-motion/client';
 
 export default function Calculator() {
   const [currentValue, setCurrentValue] = useState<string>('0');
